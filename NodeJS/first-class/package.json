@@ -1,0 +1,27 @@
+{
+  "name": "@talendig/first-class",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon server.js",
+    "start:qa": "nodemon server.js",
+    "build": "echo 'No build step required for this project'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "nodejs",
+    "learning",
+    "talendig",
+    "first-class"
+  ],
+  "author": "Luis Adolfo Pimentel",
+  "license": "ISC",
+  "description": "First class NodeJS learning project for Talendig program",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

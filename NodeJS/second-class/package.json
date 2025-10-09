@@ -1,0 +1,30 @@
+{
+  "name": "@talendig/second-class",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:dev": "npm run build && nodemon dist/index.js",
+    "start:qa": "npm run build && nodemon dist/index.js",
+    "dev": "tsc --watch",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "nodejs",
+    "learning",
+    "talendig",
+    "second-class"
+  ],
+  "author": "Luis Adolfo Pimentel",
+  "license": "ISC",
+  "description": "Second class NodeJS learning project for Talendig program",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
