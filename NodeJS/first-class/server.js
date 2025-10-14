@@ -50,9 +50,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-  const { method, url, headers, body } = req;
-  console.log("Request details:", { method, url, headers, body: body || "No body" });
-
   return res.status(200).send({
     status: "OK",
     timestamp: "2023-10-10T10:10:10Z",

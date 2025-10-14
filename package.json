@@ -11,7 +11,6 @@
     "start": "npm run start --workspace=NodeJS/first-class",
     "start:dev": "npm run start:dev --workspace=NodeJS/first-class",
     "start:qa": "npm run start:qa --workspace=NodeJS/first-class",
-    "install:all": "npm install",
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
     "lint": "npm run lint --workspaces"
@@ -25,7 +24,18 @@
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/node": "^20.0.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "jsonwebtoken": "9.0.2"
   },
   "engines": {
     "node": ">=18.0.0",

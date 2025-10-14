@@ -19,9 +19,5 @@
   ],
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
-  "description": "First class NodeJS learning project for Talendig program",
-  "dependencies": {},
-  "devDependencies": {
-    "nodemon": "^3.1.10"
-  }
+  "description": "First class NodeJS learning project for Talendig program"
 }
