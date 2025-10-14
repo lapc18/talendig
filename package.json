@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "NodeJS/first-class",
-    "NodeJS/second-class"
+    "NodeJS/second-class",
+    "NodeJS/third-class"
   ],
   "scripts": {
     "start": "npm run start --workspace=NodeJS/first-class",
