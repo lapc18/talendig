@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "nodemon": "nodemon --signal SIGKILL",
     "start": "node dist/index.js",
     "start:dev": "npm run build && nodemon dist/index.js",
     "start:qa": "npm run build && nodemon dist/test.js",
@@ -22,5 +23,20 @@
   ],
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
-  "description": "Third class NodeJS learning project - Modules, HTTP and Asynchrony for Talendig program"
+  "description": "Third class NodeJS learning project - Modules, HTTP and Asynchrony for Talendig program",
+  "devDependencies": {
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/node": "^20.0.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "jsonwebtoken": "9.0.2",
+    "url": "0.11.4"
+  }
 }
