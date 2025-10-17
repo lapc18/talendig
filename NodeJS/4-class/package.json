@@ -19,5 +19,8 @@
   ],
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
-  "description": "Fourth class NodeJS learning project for Talendig program"
+  "description": "Fourth class NodeJS learning project for Talendig program",
+  "dependencies": {
+    "express-validator": "7.2.1"
+  }
 }
