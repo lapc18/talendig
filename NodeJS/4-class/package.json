@@ -1,0 +1,23 @@
+{
+  "name": "@talendig/fourth-class",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:dev": "npm run build && nodemon dist/index.js",
+    "start:qa": "npm run build && nodemon dist/index.js",
+    "dev": "tsc --watch",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [
+    "nodejs",
+    "learning",
+    "talendig",
+    "fourth-class"
+  ],
+  "author": "Luis Adolfo Pimentel",
+  "license": "ISC",
+  "description": "Fourth class NodeJS learning project for Talendig program"
+}

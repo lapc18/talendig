@@ -4,15 +4,17 @@
   "description": "Talendig NodeJS Learning Program - Monorepo",
   "private": true,
   "workspaces": [
-    "NodeJS/first-class",
-    "NodeJS/second-class",
-    "NodeJS/third-class"
+    "NodeJS/1-class",
+    "NodeJS/2-class",
+    "NodeJS/3-class",
+    "NodeJS/4-class"
   ],
   "scripts": {
-    "start": "npm run start --workspace=NodeJS/first-class",
-    "start:dev": "npm run start:dev --workspace=NodeJS/first-class",
-    "start:qa": "npm run start:qa --workspace=NodeJS/first-class",
-    "start:third": "npm run --workspace=NodeJS/third-class start:dev",
+    "start": "npm run start --workspace=NodeJS/1-class",
+    "start:dev": "npm run start:dev --workspace=NodeJS/1-class",
+    "start:qa": "npm run start:qa --workspace=NodeJS/1-class",
+    "start:third": "npm run --workspace=NodeJS/3-class start:dev",
+    "start:fourth": "npm run --workspace=NodeJS/4-class start:dev",
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
     "lint": "npm run lint --workspaces"
