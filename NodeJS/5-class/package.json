@@ -1,5 +1,5 @@
 {
-  "name": "@talendig/fourth-class",
+  "name": "@talendig/fifth-class",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
@@ -15,9 +15,9 @@
     "nodejs",
     "learning",
     "talendig",
-    "fourth-class"
+    "fifth-class"
   ],
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
-  "description": "Fourth class NodeJS learning project for Talendig program"
+  "description": "Fifth class NodeJS learning project for Talendig program"
 }
