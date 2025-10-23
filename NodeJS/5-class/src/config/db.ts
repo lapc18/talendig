@@ -2,12 +2,13 @@ import { Options, Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
 dotenv.config({
-    path: '.../../../../.env'
+    path: '../../.env'
 });
 
 const option:Options = {
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
+    password: process.env.DB_PWD,
     port: parseInt(process.env.DB_PORT!) || 5432,
     host: process.env.DB_HOST,
     dialect: 'postgres',

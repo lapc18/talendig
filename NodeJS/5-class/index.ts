@@ -41,14 +41,6 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
   });
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    error: 'Route not found',
-    path: req.originalUrl
-  });
-});
-
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
