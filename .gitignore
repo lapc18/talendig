@@ -210,3 +210,7 @@ coverage/
 # Misc
 *.tgz
 *.tar.gz
+
+
+#private keys
+talendig-firebase-admin-sdk.json
