@@ -1,24 +1,32 @@
 import express from 'express';
+import swaggerUi from "swagger-ui-express";
+import * as specs from './src/config/swagger'
 import { connect, sequelize } from './src/config/db';
-
-const loadConfig = async () => {
-  await connect();
-  await sequelize.sync({ alter: true });
-}
-
-loadConfig();
+import productsRouter from './src/routes/products.routes';
 
 const app = express();
 const PORT = process.env['PORT'] || 3000;
 
-// Middleware
+const loadConfig = async () => {
+  console.log('🔄 Loading config...');
+  await connect();
+  await sequelize.sync({ alter: true });
+  console.log('✅ Config loaded successfully');
+}
+
+loadConfig();
+
+// Middlewares 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
+
+
 
 // Routes
 app.get('/', (_req, res) => {
   res.json({
-    message: 'Welcome to the Fifth Class NodeJS Project!',
+    message: 'Welcome to the Fifth/Sixth Class NodeJS Project!',
     timestamp: new Date().toISOString(),
     version: '1.0.0'
   });
@@ -41,9 +49,12 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
   });
 });
 
+app.use("/api/v1/products", productsRouter);
+
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT} 🚀`);
   console.log(`📱 Health check available at http://localhost:${PORT}/health`);
 });
 

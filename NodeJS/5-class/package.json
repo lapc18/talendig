@@ -19,5 +19,15 @@
   ],
   "author": "Luis Adolfo Pimentel",
   "license": "ISC",
-  "description": "Fifth class NodeJS learning project for Talendig program"
+  "description": "Fifth class NodeJS learning project for Talendig program",
+  "dependencies": {
+    "express-rate-limit": "8.1.0",
+    "helmet": "8.1.0",
+    "swagger-jsdoc": "6.2.8",
+    "swagger-ui-express": "5.0.1"
+  },
+  "devDependencies": {
+    "@types/swagger-jsdoc": "6.0.4",
+    "@types/swagger-ui-express": "4.1.8"
+  }
 }
