@@ -1,19 +1,16 @@
 import express, { Request, Response } from "express";
-import { createProduct, getAllProducts, getProductById, updateProduct, deleteProduct } from "../services/products.service";
+import { createUser, getAllUsers, getUserById, updateUser, deleteUser, UserData } from "../services/users.service";
 import { ApiResponse, ErrorResponse } from "../types/response.types";
-import { Product } from "../models/products.model";
 import { verifyToken } from "../middleware/auth.middleware";
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/products/create-product:
+ * /api/v1/users/create-user:
  *   post:
- *     summary: Create a new product
- *     tags: [Products]
- *     security:
- *       - bearerAuth: []
+ *     summary: Create a new user
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -23,35 +20,28 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
- *               description:
+ *               email:
  *                 type: string
- *               price:
- *                 type: number
- *               stock:
- *                 type: number
  *     responses:
  *       201:
- *         description: Product created successfully
- *       401:
- *         description: Unauthorized
+ *         description: User created successfully
  *       500:
  *         description: Internal server error
  */
-router.post('/create-product',
-    verifyToken,
+router.post('/create-user',
     async (req: Request, res: Response) => {
         try {
             const { body } = req;
-            const product = await createProduct({...(body && body || {})})
+            const user = await createUser(body);
             return res.status(201).json({
                 success: true,
                 timestamp: new Date().toISOString(),
-                data: product,
-            } as ApiResponse<Product>)
+                data: user,
+            } as ApiResponse<UserData>)
         } catch (err) {
-            console.error('[ERROR]: something went wrong creating a product: ', err);
+            console.error('[ERROR]: something went wrong creating a user: ', err);
             return res.status(500).json({
-                message: `[ERROR]: something went wrong creating a product: ${err}`,
+                message: `[ERROR]: something went wrong creating a user: ${err}`,
                 error: err,
                 timestamp: new Date().toISOString(),
             } as ErrorResponse)
@@ -61,13 +51,13 @@ router.post('/create-product',
 
 /**
  * @swagger
- * /api/v1/products/get-all-products:
+ * /api/v1/users/get-all-users:
  *   get:
- *     summary: Get all products
- *     tags: [Products]
+ *     summary: Get all users
+ *     tags: [Users]
  *     responses:
  *       200:
- *         description: List of all products
+ *         description: List of all users
  *         content:
  *           application/json:
  *             schema:
@@ -80,19 +70,19 @@ router.post('/create-product',
  *                   items:
  *                     type: object
  */
-router.get('/get-all-products',
+router.get('/get-all-users',
     async (_: Request, res: Response) => {
         try {
-            const products = await getAllProducts();
+            const users = await getAllUsers();
             return res.status(200).json({ 
                 success: true,
                 timestamp: new Date().toISOString(),
-                data: products,
-            } as ApiResponse<Product[]>)
+                data: users,
+            } as ApiResponse<UserData[]>)
         } catch (err) {
-            console.error('[ERROR]: something went wrong fetching all the products: ', err);
+            console.error('[ERROR]: something went wrong fetching all the users: ', err);
             return res.status(500).json({
-                message: `[ERROR]: something went wrong fetching all the products: ${err}`,
+                message: `[ERROR]: something went wrong fetching all the users: ${err}`,
                 error: err,
                 timestamp: new Date().toISOString(),
             } as ErrorResponse)
@@ -102,22 +92,22 @@ router.get('/get-all-products',
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /api/v1/users/{id}:
  *   get:
- *     summary: Get a product by ID
- *     tags: [Products]
+ *     summary: Get a user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Product ID
+ *         description: User ID
  *     responses:
  *       200:
- *         description: Product details
+ *         description: User details
  *       404:
- *         description: Product not found
+ *         description: User not found
  */
 router.get('/:id',
     async (req: Request, res: Response) => {
@@ -126,16 +116,16 @@ router.get('/:id',
             if (!id) {
                 return res.status(400).json({
                     success: false,
-                    message: 'Product ID is required',
+                    message: 'User ID is required',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
-            const product = await getProductById(id);
+            const user = await getUserById(id);
             
-            if (!product) {
+            if (!user) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Product not found',
+                    message: 'User not found',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
@@ -143,12 +133,12 @@ router.get('/:id',
             return res.status(200).json({
                 success: true,
                 timestamp: new Date().toISOString(),
-                data: product,
-            } as ApiResponse<Product>)
+                data: user,
+            } as ApiResponse<UserData>)
         } catch (err) {
-            console.error('[ERROR]: something went wrong fetching the product: ', err);
+            console.error('[ERROR]: something went wrong fetching the user: ', err);
             return res.status(500).json({
-                message: `[ERROR]: something went wrong fetching the product: ${err}`,
+                message: `[ERROR]: something went wrong fetching the user: ${err}`,
                 error: err,
                 timestamp: new Date().toISOString(),
             } as ErrorResponse)
@@ -158,10 +148,10 @@ router.get('/:id',
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /api/v1/users/{id}:
  *   put:
- *     summary: Update a product by ID
- *     tags: [Products]
+ *     summary: Update a user by ID
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -170,7 +160,7 @@ router.get('/:id',
  *         required: true
  *         schema:
  *           type: string
- *         description: Product ID
+ *         description: User ID
  *     requestBody:
  *       required: true
  *       content:
@@ -180,19 +170,15 @@ router.get('/:id',
  *             properties:
  *               name:
  *                 type: string
- *               description:
+ *               email:
  *                 type: string
- *               price:
- *                 type: number
- *               stock:
- *                 type: number
  *     responses:
  *       200:
- *         description: Product updated successfully
+ *         description: User updated successfully
  *       401:
  *         description: Unauthorized
  *       404:
- *         description: Product not found
+ *         description: User not found
  */
 router.put('/:id',
     verifyToken,
@@ -202,17 +188,17 @@ router.put('/:id',
             if (!id) {
                 return res.status(400).json({
                     success: false,
-                    message: 'Product ID is required',
+                    message: 'User ID is required',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
             const { body } = req;
-            const product = await updateProduct(id, body);
+            const user = await updateUser(id, body);
             
-            if (!product) {
+            if (!user) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Product not found',
+                    message: 'User not found',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
@@ -220,12 +206,12 @@ router.put('/:id',
             return res.status(200).json({
                 success: true,
                 timestamp: new Date().toISOString(),
-                data: product,
-            } as ApiResponse<Product>)
+                data: user,
+            } as ApiResponse<UserData>)
         } catch (err) {
-            console.error('[ERROR]: something went wrong updating the product: ', err);
+            console.error('[ERROR]: something went wrong updating the user: ', err);
             return res.status(500).json({
-                message: `[ERROR]: something went wrong updating the product: ${err}`,
+                message: `[ERROR]: something went wrong updating the user: ${err}`,
                 error: err,
                 timestamp: new Date().toISOString(),
             } as ErrorResponse)
@@ -235,10 +221,10 @@ router.put('/:id',
 
 /**
  * @swagger
- * /api/v1/products/{id}:
+ * /api/v1/users/{id}:
  *   delete:
- *     summary: Delete a product by ID
- *     tags: [Products]
+ *     summary: Delete a user by ID
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -247,14 +233,14 @@ router.put('/:id',
  *         required: true
  *         schema:
  *           type: string
- *         description: Product ID
+ *         description: User ID
  *     responses:
  *       200:
- *         description: Product deleted successfully
+ *         description: User deleted successfully
  *       401:
  *         description: Unauthorized
  *       404:
- *         description: Product not found
+ *         description: User not found
  */
 router.delete('/:id',
     verifyToken,
@@ -264,29 +250,29 @@ router.delete('/:id',
             if (!id) {
                 return res.status(400).json({
                     success: false,
-                    message: 'Product ID is required',
+                    message: 'User ID is required',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
-            const deleted = await deleteProduct(id);
+            const deleted = await deleteUser(id);
             
             if (!deleted) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Product not found',
+                    message: 'User not found',
                     timestamp: new Date().toISOString(),
                 } as ErrorResponse)
             }
             
             return res.status(200).json({
                 success: true,
-                message: 'Product deleted successfully',
+                message: 'User deleted successfully',
                 timestamp: new Date().toISOString(),
             } as ApiResponse)
         } catch (err) {
-            console.error('[ERROR]: something went wrong deleting the product: ', err);
+            console.error('[ERROR]: something went wrong deleting the user: ', err);
             return res.status(500).json({
-                message: `[ERROR]: something went wrong deleting the product: ${err}`,
+                message: `[ERROR]: something went wrong deleting the user: ${err}`,
                 error: err,
                 timestamp: new Date().toISOString(),
             } as ErrorResponse)
@@ -295,3 +281,4 @@ router.delete('/:id',
 );
 
 export default router;
+

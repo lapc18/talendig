@@ -1,8 +1,9 @@
 import express from 'express';
 import swaggerUi from "swagger-ui-express";
-import * as specs from './src/config/swagger'
+import specs from './src/config/swagger'
 import { connect, sequelize } from './src/config/db';
 import productsRouter from './src/routes/products.routes';
+import usersRouter from './src/routes/users.routes';
 
 const app = express();
 const PORT = process.env['PORT'] || 3000;
@@ -50,12 +51,13 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 });
 
 app.use("/api/v1/products", productsRouter);
-
+app.use("/api/v1/users", usersRouter);
 
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT} 🚀`);
   console.log(`📱 Health check available at http://localhost:${PORT}/health`);
+  console.log(`📚 API Documentation available at http://localhost:${PORT}/api-docs`);
 });
 
 export default app;

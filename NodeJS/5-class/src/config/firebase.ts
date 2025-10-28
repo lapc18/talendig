@@ -1,11 +1,14 @@
-import { initializeApp, firestore, credential, ServiceAccount, auth, } from "firebase-admin";
-import serviceAccount from './talendig-firebase-admin-sdk.json';
+import admin from "firebase-admin";
 
-initializeApp({
-    credential: credential.cert(serviceAccount as ServiceAccount)
+admin.initializeApp({
+    credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
 })
 
 export const fb = {
-    firestore: firestore(),
-    auth: auth(),
+    firestore: admin.firestore(),
+    auth: admin.auth(),
 }
