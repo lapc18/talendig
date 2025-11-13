@@ -8,7 +8,8 @@
     "NodeJS/2-class",
     "NodeJS/3-class",
     "NodeJS/4-class",
-    "NodeJS/5-class"
+    "NodeJS/5-class",
+    "NodeJS/6-final-project"
   ],
   "scripts": {
     "start": "npm run start --workspace=NodeJS/1-class",
@@ -17,6 +18,7 @@
     "start:third": "npm run --workspace=NodeJS/3-class start:dev",
     "start:fourth": "npm run --workspace=NodeJS/4-class start:dev",
     "start:fifth": "npm run --workspace=NodeJS/5-class start:dev",
+    "start:final": "npm run --workspace=NodeJS/6-final-project start:dev",
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
     "lint": "npm run lint --workspaces"
@@ -43,11 +45,13 @@
     "express": "5.1.0",
     "express-validator": "7.2.1",
     "firebase-admin": "13.5.0",
+    "helmet": "8.1.0",
     "jsonwebtoken": "9.0.2",
     "pg": "8.16.3",
     "pg-hstore": "2.3.4",
     "sequelize": "6.37.7",
-    "url": "0.11.4"
+    "url": "0.11.4",
+    "zod": "^3.22.4"
   },
   "engines": {
     "node": ">=18.0.0",
